@@ -19,7 +19,7 @@ INSERT INTO Student (Student_Name, Email, Age, Dept_ID) VALUES
 ('Akancha Singh', 'aksingh744@gmail.com', 24, 103),
 ('Tanay Pandey', 'tpandey859@gmail.com', 24, 103),
 ('Jasprit Bumrah', 'jbumrah74@gmail.com', 25, 104),
-('Anvisha Shirke', 'anvishashirke45@gmail.com', 26, 105),
+('Anvisha Shirke', 'anvishashirke45@gmail.com', 26, 105);
 CREATE TABLE Course (
 Course_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 Course_Name VARCHAR(100),
@@ -36,7 +36,7 @@ INSERT INTO Course (Course_Name, Credits, Dept_ID) VALUES
 ('Botany', 3.00, 101),
 ('Biology', 2.00, 101),
 ('Maths', 5.00, 102),
-('Chemistry', 9.00, 103),
+('Chemistry', 9.00, 103);
 SELECT * FROM Student;
 SELECT * FROM Course;
 CREATE VIEW StudentInfo AS
