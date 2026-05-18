@@ -35,7 +35,7 @@ SELECT CONCAT('Employee ID: ', emp_id_var,
 END LOOP;
 CLOSE emp_cursor;
 END$$
-DELIMITER;
+DELIMITER ;
 CALL GetEmployeeDetails();
 DELIMITER $$
 CREATE PROCEDURE ListAllEmployees()
@@ -62,5 +62,5 @@ CLOSE emp_cursor;
 SELECT * FROM emp_details;
 DROP TEMPORARY TABLE emp_details;
 END$$
-DELIMITER;
+DELIMITER ;
 CALL ListAllEmployees();
