@@ -1,29 +1,16 @@
-I]=>
-
 USE college_db;
-
-
-
 CREATE TABLE Emp1 (
 emp_id INT PRIMARY KEY,
 emp_name VARCHAR(100),
 department VARCHAR(100),
 salary DECIMAL(10, 2)
 );
-
-
-
 INSERT INTO Emp1 (emp_id, emp_name, department, salary) VALUES
 (1, 'Ramesh Kumar', 'IT', 45000),
 (2, 'Anita Sharma', 'HR', 38000),
 (3, 'Suresh Verma', 'IT', 50000),
 (4, 'Geeta Patel', 'Finance', 42000),
 (5, 'Mohit Singh', 'Marketing', 40000);
-
-
-
-II]=>
-
 DELIMITER $$
 CREATE PROCEDURE GetEmployeeDetails()
 BEGIN
@@ -49,17 +36,7 @@ END LOOP;
 CLOSE emp_cursor;
 END$$
 DELIMITER;
-
-
-
-III]=>
-
 CALL GetEmployeeDetails();
-
-
-
-IV]=>
-
 DELIMITER $$
 CREATE PROCEDURE ListAllEmployees()
 BEGIN
@@ -86,10 +63,4 @@ SELECT * FROM emp_details;
 DROP TEMPORARY TABLE emp_details;
 END$$
 DELIMITER;
-
-
-
-V]=>
-
 CALL ListAllEmployees();
-

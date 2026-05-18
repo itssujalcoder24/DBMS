@@ -1,5 +1,4 @@
 db.Employee.deleteMany({})
-
 db.Employee.insertMany([
 {
 Empid: 1,
@@ -74,11 +73,6 @@ EmailId: "priya.singh@tcs.com",
 Contact: "9876543215"
 }
 ])
-
-
-
-I]=>
-
 db.Employee.aggregate([
 {
 $match: { Salary: { $gt: 60000 } }
@@ -94,11 +88,6 @@ EmployeeCount: { $sum: 1 }
 $sort: { TotalSalary: -1 }
 }
 ])
-
-
-
-II]=>
-
 db.Employee.aggregate([
 {
 $group: {
@@ -111,11 +100,6 @@ MinSalary: { $min: "$Salary" }
 $sort: { _id: 1 }
 }
 ])
-
-
-
-III]=>
-
 db.Employee.aggregate([
 {
 $group: {
@@ -129,13 +113,7 @@ EmployeeCount: { $sum: 1 }
 $out: "CompanySalaryStats"
 }
 ])
-
 db.CompanySalaryStats.find()
-
-
-
-IV]=>
-
 db.Employee.aggregate([
 {
 $group: {
@@ -147,17 +125,7 @@ EmployeeCount: { $sum: 1 }
 $sort: { EmployeeCount: -1 }
 }
 ])
-
-
-
-V]=>
-
 db.Employee.countDocuments()
-
-
-
-VI]=>
-
 db.Employee.aggregate([
 {
 $group: {

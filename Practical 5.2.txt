@@ -1,9 +1,6 @@
 DROP DATABASE college_db;
-
 CREATE DATABASE college_db;
-
 USE college_db;
-
 CREATE TABLE Student (
 Student_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 Student_Name VARCHAR(100),
@@ -11,9 +8,7 @@ Email VARCHAR(100),
 Age INT,
 Dept_ID INT
 );
-
 ALTER TABLE Student AUTO_INCREMENT=101101;
-
 INSERT INTO Student (Student_Name, Email, Age, Dept_ID) VALUES
 ('Sujal Das', 'sujaldas9702@gmail.com', 21, 101),
 ('Shravani Rokade', 'srokade67@gmail.com', 21, 101),
@@ -25,14 +20,12 @@ INSERT INTO Student (Student_Name, Email, Age, Dept_ID) VALUES
 ('Tanay Pandey', 'tpandey859@gmail.com', 24, 103),
 ('Jasprit Bumrah', 'jbumrah74@gmail.com', 25, 104),
 ('Anvisha Shirke', 'anvishashirke45@gmail.com', 26, 105),
-
 CREATE TABLE Course (
 Course_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 Course_Name VARCHAR(100),
 Credits Decimal(10, 2),
 Dept_ID INT
 );
-
 INSERT INTO Course (Course_Name, Credits, Dept_ID) VALUES
 ('Japanese', 6.00, 101),
 ('English', 8.00, 104),
@@ -44,71 +37,31 @@ INSERT INTO Course (Course_Name, Credits, Dept_ID) VALUES
 ('Biology', 2.00, 101),
 ('Maths', 5.00, 102),
 ('Chemistry', 9.00, 103),
-
 SELECT * FROM Student;
-
 SELECT * FROM Course;
-
-
-I]=>
-
 CREATE VIEW StudentInfo AS
 SELECT Student_Name, Email, Dept_ID FROM Student;
-
 SELECT * FROM StudentInfo;
-
-
-
-II]=>
-
 CREATE VIEW AdultStudents AS
 SELECT Student_ID, Student_Name, Email, Age FROM Student
 WHERE Age > 20;
-
 SELECT * FROM AdultStudents;
-
-
-
-III]=>
-
 CREATE VIEW CourseInfo AS
 SELECT Course_Name, Credits FROM Course;
-
 SELECT * FROM CourseInfo;
-
-
-
-IV]=>
-
 SELECT * FROM StudentInfo;
-
 SELECT * FROM StudentInfo WHERE Dept_ID = 1;
-
 SELECT si.Student_Name, si.Email, cr.Course_Name
 FROM StudentInfo si
 JOIN Enrollments e ON si.Email IS NOT NULL AND si.Email IN (
 SELECT Email FROM Student WHERE Student_ID = e.Student_ID
 );
-
 SELECT COUNT(*) as Total_Adult_Students FROM AdultStudents;
-
-
-
-V]=>
-
 UPDATE StudentInfo
 SET Email = 'newemailaddress@gmail.com'
 WHERE Student_Name = 'Sujal Das';
-
 SELECT Student_Name, Email FROM Student WHERE Student_Name = 'Sujal Das';
-
-
-
-VI]=>
-
 DELETE FROM StudentInfo
 WHERE Student_Name = 'Anvisha Shirke';
-
 SELECT COUNT(*) FROM Student;
-
 SELECT * FROM Student;

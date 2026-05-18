@@ -1,96 +1,44 @@
 DROP DATABASE college_db;
-
 CREATE DATABASE college_db;
-
 USE college_db;
-
 CREATE TABLE Employee (
 emp_id INT PRIMARY KEY NOT NULL,
 name VARCHAR(100) NOT NULL,
 department VARCHAR(100),
 salary DECIMAL(10, 2)
 );
-
 CREATE TABLE Department (
 dept_id INT PRIMARY KEY NOT NULL,
 dept_name VARCHAR(100)
 );
-
 CREATE TABLE Student (
 id INT PRIMARY KEY NOT NULL,
 name VARCHAR(100),
 dob DATE,
 marks INT
 );
-
-
-
-I]=>
-
 ALTER TABLE Employee ADD email VARCHAR(100);
-
-
-
-II]=>
-
 ALTER TABLE Employee CHANGE COLUMN department dept_name VARCHAR(100);
-
-
-
-III]=>
-
 ALTER TABLE Employee ADD designation VARCHAR(100);
-
 INSERT INTO Employee (emp_id, name, dept_name, salary, email, designation) VALUES
 (101, 'Ramesh Kumar', 'IT', 45000, 'ramesh@company.com', 'Senior Developer'),
 (102, 'Anita Sharma', 'HR', 38000, 'anita@company.com', 'HR Manager'),
 (103, 'Suresh Verma', 'IT', 50000, 'suresh@company.com', 'Tech Lead'),
 (104, 'Geeta Patel', 'Finance', 42000, 'geeta@company.com', 'Financial Analyst'),
 (105, 'Mohit Singh', 'Marketing', 40000, 'mohit@company.com', 'Marketing Manager');
-
-
-
-IV]=>
-
 ALTER TABLE Department RENAME TO Dept;
-
-
-
-V]=>
-
 DROP TABLE Dept;
-
 SHOW TABLES;
-
 SELECT * FROM Dept;
-
-
-
-VI]=>
-
 INSERT INTO Student (id, name, dob, marks) VALUES
 (1, 'Arjun Singh', '2005-05-15', 85),
 (2, 'Tejas Yadav', '2006-08-22', 78),
 (3, 'Sujal Das', '2006-03-24', 98),
 (4, 'Shravani Gupta', '2006-11-05', 88),
 (5, 'Yash Pandey', '2005-03-18', 76);
-
-
-
-VII]=>
-
 TRUNCATE TABLE Student;
-
 DESC Student;
-
 SELECT * FROM Student;
-
-
-
-VIII]=>
-
 ALTER TABLE Employee DROP COLUMN salary;
-
 DESC Employee;
-
 SELECT * FROM Employee;
