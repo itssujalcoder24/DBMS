@@ -50,12 +50,7 @@ CREATE VIEW CourseInfo AS
 SELECT Course_Name, Credits FROM Course;
 SELECT * FROM CourseInfo;
 SELECT * FROM StudentInfo;
-SELECT * FROM StudentInfo WHERE Dept_ID = 1;
-SELECT si.Student_Name, si.Email, cr.Course_Name
-FROM StudentInfo si
-JOIN Enrollments e ON si.Email IS NOT NULL AND si.Email IN (
-SELECT Email FROM Student WHERE Student_ID = e.Student_ID
-);
+SELECT * FROM StudentInfo WHERE Dept_ID = 101;
 SELECT COUNT(*) as Total_Adult_Students FROM AdultStudents;
 UPDATE StudentInfo
 SET Email = 'newemailaddress@gmail.com'
