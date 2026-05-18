@@ -1,0 +1,95 @@
+I]=>
+
+USE college_db;
+
+
+
+CREATE TABLE Emp1 (
+emp_id INT PRIMARY KEY,
+emp_name VARCHAR(100),
+department VARCHAR(100),
+salary DECIMAL(10, 2)
+);
+
+
+
+INSERT INTO Emp1 (emp_id, emp_name, department, salary) VALUES
+(1, 'Ramesh Kumar', 'IT', 45000),
+(2, 'Anita Sharma', 'HR', 38000),
+(3, 'Suresh Verma', 'IT', 50000),
+(4, 'Geeta Patel', 'Finance', 42000),
+(5, 'Mohit Singh', 'Marketing', 40000);
+
+
+
+II]=>
+
+DELIMITER $$
+CREATE PROCEDURE GetEmployeeDetails()
+BEGIN
+DECLARE done INT DEFAULT FALSE;
+DECLARE emp_id_var INT;
+DECLARE emp_name_var VARCHAR(100);
+DECLARE dept_var VARCHAR(100);
+DECLARE salary_var DECIMAL(10, 2);
+DECLARE emp_cursor CURSOR FOR 
+SELECT emp_id, emp_name, department, salary FROM Emp1;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+OPEN emp_cursor;
+read_loop: LOOP
+FETCH emp_cursor INTO emp_id_var, emp_name_var, dept_var, salary_var;
+IF done THEN
+LEAVE read_loop;
+END IF;
+SELECT CONCAT('Employee ID: ', emp_id_var, 
+', Name: ', emp_name_var, 
+', Department: ', dept_var, 
+', Salary: ', salary_var) AS Employee_Details;
+END LOOP;
+CLOSE emp_cursor;
+END$$
+DELIMITER;
+
+
+
+III]=>
+
+CALL GetEmployeeDetails();
+
+
+
+IV]=>
+
+DELIMITER $$
+CREATE PROCEDURE ListAllEmployees()
+BEGIN
+DECLARE done INT DEFAULT FALSE;
+DECLARE emp_id_val INT;
+DECLARE emp_name_val VARCHAR(100);
+DECLARE department_val VARCHAR(100);
+DECLARE salary_val DECIMAL(10, 2);
+DECLARE emp_cursor CURSOR FOR 
+SELECT emp_id, emp_name, department, salary FROM Emp1;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+CREATE TEMPORARY TABLE IF NOT EXISTS emp_details AS
+SELECT emp_id, emp_name, department, salary FROM Emp1 LIMIT 0;
+OPEN emp_cursor;
+read_loop: LOOP
+FETCH emp_cursor INTO emp_id_val, emp_name_val, department_val, salary_val;
+IF done THEN
+LEAVE read_loop;
+END IF;
+INSERT INTO emp_details VALUES (emp_id_val, emp_name_val, department_val, salary_val);
+END LOOP;
+CLOSE emp_cursor;
+SELECT * FROM emp_details;
+DROP TEMPORARY TABLE emp_details;
+END$$
+DELIMITER;
+
+
+
+V]=>
+
+CALL ListAllEmployees();
+

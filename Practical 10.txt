@@ -1,0 +1,171 @@
+db.Employee.deleteMany({})
+
+db.Employee.insertMany([
+{
+Empid: 1,
+Name: { FName: "Sujal", LName: "Das" },
+CompanyName: "Google",
+Salary: 95000,
+Designation: "Junior Developer",
+Age: 20,
+Expertise: ["Python", "Kotlin", "Java", "SQL"],
+DOB: new Date("2006-03-24"),
+EmailId: "sujal.das@google.com",
+Contact: "8356894561"
+},
+{
+Empid: 2,
+Name: { FName: "Shravani", LName: "Sharma" },
+CompanyName: "TCS",
+Salary: 65000,
+Designation: "HR Manager",
+Age: 32,
+Expertise: ["HR", "Recruitment"],
+DOB: new Date("1991-08-22"),
+EmailId: "shravani.sharma@tcs.com",
+Contact: "9876543211"
+},
+{
+Empid: 3,
+Name: { FName: "Suresh", LName: "Verma" },
+CompanyName: "Infosys",
+Salary: 50000,
+Designation: "Tech Lead",
+Age: 38,
+Expertise: ["Python", "Machine Learning", "Data Science"],
+DOB: new Date("1985-01-10"),
+EmailId: "suresh.verma@infosys.com",
+Contact: "9876543212"
+},
+{
+Empid: 4,
+Name: { FName: "Geeta", LName: "Patel" },
+CompanyName: "Infosys",
+Salary: 65000,
+Designation: "Software Engineer",
+Age: 26,
+Expertise: ["JavaScript", "React", "Node.js"],
+DOB: new Date("1997-11-05"),
+EmailId: "geeta.patel@infosys.com",
+Contact: "9876543213"
+},
+{
+Empid: 5,
+Name: { FName: "Mohit", LName: "Singh" },
+CompanyName: "HCL",
+Salary: 75000,
+Designation: "Developer",
+Age: 28,
+Expertise: ["C++", "Design Patterns"],
+DOB: new Date("1995-03-18"),
+EmailId: "mohit.singh@hcl.com",
+Contact: "9876543214"
+},
+{
+Empid: 6,
+Name: { FName: "Priya", LName: "Singh" },
+CompanyName: "TCS",
+Salary: 72000,
+Designation: "Software Engineer",
+Age: 25,
+Expertise: ["JavaScript", "Python"],
+DOB: new Date("1998-07-12"),
+EmailId: "priya.singh@tcs.com",
+Contact: "9876543215"
+}
+])
+
+
+
+I]=>
+
+db.Employee.aggregate([
+{
+$match: { Salary: { $gt: 60000 } }
+},
+{
+$group: {
+_id: "$CompanyName",  
+TotalSalary: { $sum: "$Salary" },
+EmployeeCount: { $sum: 1 }
+}
+},
+{
+$sort: { TotalSalary: -1 }
+}
+])
+
+
+
+II]=>
+
+db.Employee.aggregate([
+{
+$group: {
+_id: "$CompanyName",
+MaxSalary: { $max: "$Salary" },
+MinSalary: { $min: "$Salary" }
+}
+},
+{
+$sort: { _id: 1 }
+}
+])
+
+
+
+III]=>
+
+db.Employee.aggregate([
+{
+$group: {
+_id: "$CompanyName",
+TotalSalary: { $sum: "$Salary" },
+AverageSalary: { $avg: "$Salary" },
+EmployeeCount: { $sum: 1 }
+}
+},
+{
+$out: "CompanySalaryStats"
+}
+])
+
+db.CompanySalaryStats.find()
+
+
+
+IV]=>
+
+db.Employee.aggregate([
+{
+$group: {
+_id: "$Designation",
+EmployeeCount: { $sum: 1 }
+}
+},
+{
+$sort: { EmployeeCount: -1 }
+}
+])
+
+
+
+V]=>
+
+db.Employee.countDocuments()
+
+
+
+VI]=>
+
+db.Employee.aggregate([
+{
+$group: {
+_id: "$CompanyName",
+AverageSalary: { $avg: "$Salary" }
+}
+},
+{
+$sort: { AverageSalary: -1 }
+}
+])
